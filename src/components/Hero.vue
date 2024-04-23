@@ -1,5 +1,5 @@
 <template>
-  <div class="hero">
+  <div class="hero mt-[3.45pc] mb-[4pc]">
     <div class="container">
       <div class="hero__content">
         <div class="hero__content__left flex justify-between">
@@ -28,7 +28,7 @@
   background: rgb(244, 239, 233);
 }
 .hero__content__left {
-  padding: 0 30px;
+  padding-left:30px;
   h1 {
     font-family: Inter;
     font-size: 38px;
