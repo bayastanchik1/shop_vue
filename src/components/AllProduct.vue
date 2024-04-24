@@ -13,11 +13,18 @@
               </template>
               <v-list>
                 <v-list-item v-for="(item, i) in itemsMenu" :key="i">
-                  <v-list-item-title>{{ item }}</v-list-item-title>
+                  <v-list-item-title @click="sortByPrice(item.id)">{{
+                    item.title
+                  }}</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-menu>
-            <input type="text" name="" id="" placeholder="Поиск..." />
+            <input
+              v-model="searchValue"
+              @input="searchProduct"
+              type="text"
+              placeholder="Поиск..."
+            />
           </div>
         </div>
 
@@ -40,15 +47,18 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import ProductCard from "../components/ProductCard.vue";
 import axios from "axios";
+
 const items = ref([]);
 const itemsMenu = ref([
-  "цена по возрастанию",
-  "цена по убыванию",
-  "сортировка",
+  { title: "цена по возрастанию", id: 1 },
+  { title: "цена по убыванию", id: 2 },
+  { title: "сортировка", id: 3 },
 ]);
+const searchValue = ref("");
+
 onMounted(async () => {
   try {
     const { data } = await axios.get(
@@ -58,8 +68,30 @@ onMounted(async () => {
   } catch (error) {
     console.log(error);
   }
-  console.log(items.value);
 });
+
+function sortByPrice(id) {
+  let sortBy = "";
+  if (id == 1) {
+    sortBy = "price";
+  } else if (id == 2) {
+    sortBy = "-price";
+  } else if (id == 3) {
+    sortBy = "title";
+  }
+
+  axios
+    .get(`https://0ba3c8ee34fc457f.mokky.dev/items1?sortBy=${sortBy}`)
+    .then((res) => (items.value = res.data));
+}
+
+function searchProduct() {
+  axios
+    .get(
+      `https://0ba3c8ee34fc457f.mokky.dev/items1?title=*${searchValue.value}*`
+    )
+    .then((res) => (items.value = res.data));
+}
 </script>
 
 <style lang="scss">
@@ -88,8 +120,6 @@ onMounted(async () => {
         width: 250px;
         height: 45px;
       }
-    }
-    &__body {
     }
   }
 }

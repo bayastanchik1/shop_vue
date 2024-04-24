@@ -39,7 +39,6 @@ import { useBasketProduct } from "../store/store";
 const basketStore = useBasketProduct();
 const items = ref(basketStore.product);
 
-// Следите за изменениями в корзине и обновляйте items
 watchEffect(() => {
   items.value = basketStore.product;
 });

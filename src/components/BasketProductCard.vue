@@ -13,6 +13,7 @@
           </v-btn>
           <v-btn @click="deleteBasketProduct" variant="outlined">
             удалить
+            
           </v-btn>
         </v-card>
       </v-card-item>
