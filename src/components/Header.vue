@@ -7,7 +7,7 @@
             <img src="/svg/logo.svg" alt="" />
           </router-link>
           <div>
-            <h3>REACT SNEAKERS</h3>
+            <h3>VUE</h3>
             <p>Магазин лучших кроссовок</p>
           </div>
         </div>
