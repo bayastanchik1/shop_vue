@@ -11,7 +11,9 @@
           <v-btn class="ml-[20px] mr-[25px]" variant="outlined">
             в избранное
           </v-btn>
-          <v-btn @click="AddToBasket" variant="outlined"> в корзину </v-btn>
+          <v-btn @click="deleteBasketProduct" variant="outlined">
+            удалить
+          </v-btn>
         </v-card>
       </v-card-item>
     </v-card>
@@ -28,8 +30,8 @@ const props = defineProps({
   price: Number,
   id: Number,
 });
-function AddToBasket() {
-  basketStore.addProductToBasket(props);
+function deleteBasketProduct() {
+  basketStore.deleteProductToBasket(props.id);
 }
 </script>
 

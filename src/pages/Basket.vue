@@ -1,10 +1,7 @@
 <template>
   <section class="basket h-[100vh]">
     <div class="container">
-      <div
-        v-if="basketStore.product.length == 0"
-        class="flex justify-center mt-[10pc]"
-      >
+      <div v-if="items.length === 0" class="flex justify-center mt-[10pc]">
         <center class="flex flex-col items-center gap-3">
           <div class="w-[70px] h-[70px]">
             <img src="/public/svg/smileNoProduct.svg" alt="" />
@@ -14,20 +11,38 @@
             Вы нищеброд? <br />
             Оформите хотя бы один заказ.
           </p>
-          <button class="basket__content__button mt-[1pc]">
-            Вернуться назад
-          </button>
+          <router-link to="/">
+            <button class="basket__content__button mt-[1pc]">
+              Вернуться назад
+            </button>
+          </router-link>
         </center>
       </div>
       <div v-else class="basket__content grid grid-cols-3">
-        gfnwqeognewogneo[]
+        <BasketProductCard
+          :title="item.title"
+          :image="item.image"
+          :price="item.price"
+          :id="item.id"
+          v-for="(item, idx) in items"
+          :key="idx"
+        />
       </div>
     </div>
   </section>
 </template>
 <script setup>
+import { ref, watchEffect } from "vue";
+import BasketProductCard from "../components/BasketProductCard.vue";
 import { useBasketProduct } from "../store/store";
+
 const basketStore = useBasketProduct();
+const items = ref(basketStore.product);
+
+// Следите за изменениями в корзине и обновляйте items
+watchEffect(() => {
+  items.value = basketStore.product;
+});
 </script>
 <style lang="scss">
 .basket {

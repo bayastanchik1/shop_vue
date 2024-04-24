@@ -24,10 +24,11 @@
         <div
           class="allProduct__content__body grid grid-cols-3 gap-[20px] mt-[100px]"
         >
-        <ProductCard
+          <ProductCard
             :title="item.title"
             :image="item.imageUrl"
             :price="item.price"
+            :id="item.id"
             v-for="(item, idx) in items"
             :key="idx"
             name=""
