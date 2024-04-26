@@ -8,7 +8,11 @@
         <v-card-title>название: {{ title }}</v-card-title>
         <v-card-title>стоимость:{{ price }}$</v-card-title>
         <v-card class="flex mt-[20px]">
-          <v-btn class="ml-[20px] mr-[25px]" variant="outlined">
+          <v-btn
+            @click="AddToFavorite"
+            class="ml-[20px] mr-[25px]"
+            variant="outlined"
+          >
             в избранное
           </v-btn>
           <v-btn @click="AddToBasket" variant="outlined"> в корзину </v-btn>
@@ -30,6 +34,9 @@ const props = defineProps({
 });
 function AddToBasket() {
   basketStore.addProductToBasket(props);
+}
+function AddToFavorite() {
+  basketStore.addProductToFavorite(props);
 }
 </script>
 

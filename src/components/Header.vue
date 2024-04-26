@@ -15,7 +15,7 @@
           <router-link to="/basket">
             <li class="flex items-center gap-2">
               <img src="/svg/basket.svg" alt="" />
-              1205 руб.
+              {{ priceHeader }} руб.
             </li>
           </router-link>
           <router-link to="/favorite">
@@ -38,6 +38,14 @@
 
 <script setup>
 import { RouterLink } from "vue-router";
+import { useBasketProduct } from "../store/store";
+import { ref, watchEffect } from "vue";
+const basket = useBasketProduct();
+const priceHeader = ref(0);
+
+watchEffect(() => {
+  priceHeader.value = basket.product.reduce((acc, el) => acc + el.price, 0);
+});
 </script>
 
 <style>

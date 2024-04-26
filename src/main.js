@@ -15,6 +15,7 @@ const vuetify = createVuetify({
   directives,
 });
 import { createPinia } from "pinia";
+import Favorites from "./pages/Favorites.vue";
 const pinia = createPinia();
 
 const routes = [
@@ -25,6 +26,10 @@ const routes = [
   {
     path: "/basket",
     component: Basket,
+  },
+  {
+    path: "/favorite",
+    component: Favorites,
   },
 ];
 const router = createRouter({
